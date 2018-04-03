@@ -3,6 +3,7 @@
 #include <linux/compiler.h>
 
 MODULE_INFO(vermagic, VERMAGIC_STRING);
+MODULE_INFO(name, KBUILD_MODNAME);
 
 __visible struct module __this_module
 __attribute__((section(".gnu.linkonce.this_module"))) = {
@@ -14,6 +15,10 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 	.arch = MODULE_ARCH_INIT,
 };
 
+#ifdef RETPOLINE
+MODULE_INFO(retpoline, "Y");
+#endif
+
 static const struct modversion_info ____versions[]
 __used
 __attribute__((section("__versions"))) = {
@@ -23,10 +28,13 @@ __attribute__((section("__versions"))) = {
 	{ 0x122e6e41, __VMLINUX_SYMBOL_STR(cpu_tss) },
 	{ 0xc0430403, __VMLINUX_SYMBOL_STR(pci_bus_read_config_byte) },
 	{ 0xd2b09ce5, __VMLINUX_SYMBOL_STR(__kmalloc) },
+	{ 0x1ed8b599, __VMLINUX_SYMBOL_STR(__x86_indirect_thunk_r8) },
+	{ 0xa63e0bb3, __VMLINUX_SYMBOL_STR(pci_write_config_word) },
 	{ 0xd6ee688f, __VMLINUX_SYMBOL_STR(vmalloc) },
 	{ 0x349cba85, __VMLINUX_SYMBOL_STR(strchr) },
 	{ 0xc364ae22, __VMLINUX_SYMBOL_STR(iomem_resource) },
 	{ 0x754d539c, __VMLINUX_SYMBOL_STR(strlen) },
+	{ 0xdbb6afc2, __VMLINUX_SYMBOL_STR(pci_read_config_byte) },
 	{ 0xc29bf967, __VMLINUX_SYMBOL_STR(strspn) },
 	{ 0x2adcfc6d, __VMLINUX_SYMBOL_STR(pci_get_slot) },
 	{ 0xb075141, __VMLINUX_SYMBOL_STR(pci_disable_device) },
@@ -131,8 +139,8 @@ __attribute__((section("__versions"))) = {
 	{ 0xf20dabd8, __VMLINUX_SYMBOL_STR(free_irq) },
 	{ 0x54c3ddaf, __VMLINUX_SYMBOL_STR(pci_save_state) },
 	{ 0xe914e41e, __VMLINUX_SYMBOL_STR(strcpy) },
-	{ 0xe259126d, __VMLINUX_SYMBOL_STR(filp_open) },
-	{ 0xd1df80a4, __VMLINUX_SYMBOL_STR(alloc_etherdev_mqs) },
+	{ 0x45bcdfbd, __VMLINUX_SYMBOL_STR(filp_open) },
+	{ 0x4ee8c21c, __VMLINUX_SYMBOL_STR(alloc_etherdev_mqs) },
 };
 
 static const char __module_depends[]
@@ -142,4 +150,4 @@ __attribute__((section(".modinfo"))) =
 
 MODULE_ALIAS("pci:v00001814d00005592sv*sd*bc*sc*i*");
 
-MODULE_INFO(srcversion, "546DEAEBE110AB2FF94FA79");
+MODULE_INFO(srcversion, "0E56138620B7F4B5081B53C");
