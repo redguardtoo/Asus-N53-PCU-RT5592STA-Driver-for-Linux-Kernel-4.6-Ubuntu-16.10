@@ -243,7 +243,7 @@ typedef INT (*RTMP_OS_TASK_CALLBACK)(ULONG);
  **********************************************************************************/
 #define OS_HZ					RtmpOsTickUnitGet()
 
-typedef void (*TIMER_FUNCTION)(ULONG);
+typedef void (*TIMER_FUNCTION)(struct timer_list *);
 
 #define OS_WAIT					RtmpOsWait
 

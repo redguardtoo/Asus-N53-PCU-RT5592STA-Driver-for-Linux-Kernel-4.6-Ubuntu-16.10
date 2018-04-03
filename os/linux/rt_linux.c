@@ -111,6 +111,8 @@ static inline VOID __RTMP_SetPeriodicTimer(
 	add_timer(pTimer);
 }
 
+typedef struct timer_list *compat_timer_arg_t;
+
 /* convert NdisMInitializeTimer --> RTMP_OS_Init_Timer */
 static inline VOID __RTMP_OS_Init_Timer(
 	IN VOID *pReserved,
@@ -119,9 +121,8 @@ static inline VOID __RTMP_OS_Init_Timer(
 	IN PVOID data)
 {
 	if (!timer_pending(pTimer)) {
-		init_timer(pTimer);
-		pTimer->data = (unsigned long)data;
-		pTimer->function = function;
+        /* new timer interface since 4.15  */
+        timer_setup(pTimer, function, data);
 	}
 }
 
